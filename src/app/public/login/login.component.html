@@ -3,7 +3,7 @@
     <div class="login-container">
         <a href="#"><img src="/assets/logo.png" width="200" /></a>
 
-        <form class="login-form" [formGroup]="loginForm">
+        <form class="login-form" (ngSubmit)="login()" [formGroup]="loginForm">
 
             <mat-form-field>
                 <mat-label>Schul-E-Mail</mat-label>
@@ -16,9 +16,14 @@
             </mat-form-field>
 
             <button mat-flat-button color="primary" type="submit">Einloggen</button>
+
+            <div style="margin-top:10px;">
+                <button mat-button type="button" [routerLink]="['/register']">Registrieren</button>
+                <button mat-button type="button" [routerLink]="['/password-reset']">Passwort vergessen?</button>
+            </div>
         </form>
     </div>
     <footer>
-        <a href="https://www.gso-koeln.de/impressum/">Impressum</a>
+        <a href="https://www.gso-koeln.de/impressum/" target="_blank">Impressum</a>
     </footer>
 </div>

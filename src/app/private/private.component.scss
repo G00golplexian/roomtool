@@ -1,0 +1,26 @@
+.sidenav {
+    height: calc(100vh - 64px);
+}
+
+.header {
+    background: white;
+    border-bottom: 2px solid lightgray;
+}
+
+.avatar {
+    display:block;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid lightgray;
+    object-fit: cover;
+    margin: 20px;
+}
+
+.nav-title {
+    font-weight: 500;
+    display: block;
+    position: relative;
+    margin-top: 20px;
+    margin-left: 20px;
+}

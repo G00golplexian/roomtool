@@ -12,8 +12,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 //Material
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
+import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { ReportsComponent } from './privates/reports/reports.component';
+import { ReportComponent } from './privates/report/report.component';
+import { FaqComponent } from './privates/faq/faq.component';
+import { UserComponent } from './privates/user/user.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +25,10 @@ import { MatButtonModule } from '@angular/material/button';
     LoginComponent,
     RegisterComponent,
     PasswordResetComponent,
-    DashboardComponent
+    ReportsComponent,
+    ReportComponent,
+    FaqComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,

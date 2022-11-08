@@ -1,1 +1,34 @@
-<router-outlet></router-outlet>
+<mat-toolbar class="header">
+    <button mat-icon-button (click)="drawer.toggle()"><mat-icon>menu</mat-icon></button>
+    <a href="#" style="margin-left:10px;"><img src="/assets/logo.png" height="64px" /></a>
+    <span class="spacer"></span>
+    <span style="font-size: small">{{user.currentUser.firstName}} {{user.currentUser.lastName}} ({{user.currentUser.role}})</span>
+    <img [src]="user.currentUser.avatar" class="avatar clickable" [matMenuTriggerFor]="profileMenu" />
+</mat-toolbar>
+
+<mat-menu #profileMenu="matMenu">
+    <button mat-menu-item [routerLink]="['/private', 'myprofile']">Mein Profil</button>
+    <button mat-menu-item (click)="logout()">Ausloggen</button>
+</mat-menu>
+
+<mat-drawer-container class="sidenav">
+    <mat-drawer #drawer mode="side" opened>
+
+        <span class="nav-title">Navigation</span>
+        <mat-list role="list">
+            <mat-list-item role="listitem" *ngFor="let item of navigation">
+            <button mat-menu-item [routerLink]="item.path">
+                <mat-icon>{{item.icon}}</mat-icon>
+                {{item.name}}
+            </button>
+            </mat-list-item>
+        </mat-list>
+
+    </mat-drawer>
+    <mat-drawer-content>
+        <div class="content-container">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-drawer-content>
+</mat-drawer-container>
+
