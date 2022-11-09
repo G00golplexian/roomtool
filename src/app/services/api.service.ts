@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { APIResult, LoginResult } from '../models/api';
 import { Report } from '../models/report';
 import { User } from '../models/user';
-import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,13 +13,17 @@ export class ApiService {
 
 
   constructor(
-    private http: HttpClient,
-    private user: UserService
+    private http: HttpClient
   ) { }
 
-  loginUser(email: string, password: string)
+  resetPassword(email: string)
   {
-    return this.http.post<LoginResult>(`${this.APIURL}/login`, {email, password});
+    return this.http.post<LoginResult>(`${this.APIURL}/user/reset_pw`, email);
+  }
+
+  loginUser(data: { email: string, password: string })
+  {
+    return this.http.post<LoginResult>(`${this.APIURL}/login`, data);
   }
 
   getUsers()
@@ -31,6 +34,11 @@ export class ApiService {
   getUser(id: number)
   {
     return this.http.get<User>(`${this.APIURL}/user/${id}`, { headers: this.getHeaders() });
+  }
+  
+  postUser(data: User, password: string)
+  {
+    return this.http.post<APIResult>(`${this.APIURL}/user`, {...data, password});
   }
   
   putUser(user: User)
@@ -53,9 +61,9 @@ export class ApiService {
     return this.http.get<Report[]>(`${this.APIURL}/reports/room/${roomId}`, { headers: this.getHeaders() });
   }
 
-  getReport()
+  getReport(id: number)
   {
-    return this.http.get<Report>(`${this.APIURL}/report`, { headers: this.getHeaders() });
+    return this.http.get<Report>(`${this.APIURL}/report/${id}`, { headers: this.getHeaders() });
   }
 
   postReport(report: Report)

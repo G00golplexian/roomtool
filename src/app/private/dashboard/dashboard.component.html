@@ -1,15 +1,21 @@
 <mat-card>
-        <mat-card-title>Dashboard</mat-card-title>
-        <mat-card-content>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem asperiores maxime nulla minima, aut facere vitae saepe harum adipisci, tenetur architecto veniam? Dignissimos sed ex placeat tempora dolorem blanditiis at!
-        Illum deserunt, voluptates nulla dolore fugiat quidem ipsa iusto numquam, ratione quibusdam minima expedita repellendus tempore, laudantium necessitatibus quo eveniet. Impedit qui repellat aut, tempore nisi fugiat eveniet ratione aperiam.
-        Tempore repellendus rem explicabo provident? Perferendis, architecto iusto omnis culpa atque, perspiciatis ex iure suscipit ducimus accusantium eos ullam! Suscipit sit fugit quam quaerat magnam asperiores voluptatum optio laborum nobis!
-        Dignissimos reprehenderit, saepe molestiae natus impedit, a voluptates ducimus aut excepturi minima illum suscipit vitae aliquid optio doloribus. Dicta aspernatur dolores in a facere voluptate amet quam ullam est repellat.
-        Ab, unde deserunt sed corporis aliquid perferendis, quaerat eum earum porro dolorum, voluptas in. Veniam quam nihil atque quas id. Nam debitis officia fuga veritatis esse mollitia omnis dolorem sed!
-        Repellat odit nemo quas enim numquam architecto adipisci iusto. Hic, praesentium! Quis eveniet tempora repellat! Libero fuga distinctio optio reiciendis porro! Expedita ab sed, aliquid est harum illum delectus architecto?
-        Nihil at voluptatibus perspiciatis aut laboriosam quisquam delectus ad itaque iste libero velit dolores numquam, dolorem dicta incidunt nam error doloribus ex odit minima dolor consequuntur expedita. Ratione, iusto ea.
-        Pariatur dolores, ipsa, deserunt nihil asperiores ipsum dolor in temporibus maxime, voluptatem soluta aperiam excepturi a ut earum dolorem mollitia nesciunt obcaecati quam omnis. Voluptatibus harum fugiat explicabo et ab.
-        Blanditiis non sequi delectus earum nulla architecto nam ipsa optio laborum porro, consequuntur obcaecati doloremque tenetur eum est, eius et corrupti, eaque vero asperiores natus? Nisi a placeat voluptatum officiis.
-        Quis reprehenderit itaque eaque tenetur voluptas id quos error repellat, nihil quas, omnis doloribus nobis facilis dignissimos quidem. Delectus quos praesentium distinctio nulla veniam soluta a rem velit minima maiores.
+    <mat-card-title>Dashboard</mat-card-title>
+    <mat-card-content *ngIf="user.currentUser.role != role.betreuer">
+        Willkommen im Webinterface des Raumbetreuer Tools. Mit diesem Tool können Defekte oder Auffälligkeiten
+        sämtlicher Räumlichkeiten gemeldet werden. Du hast weitere Fragen zur Funktionalität? Dann lohnt sich ein Blick
+        ins FAQ.
+    </mat-card-content>
+    <mat-card-content *ngIf="user.currentUser.role == role.betreuer">
+
+        <mat-form-field>
+            <mat-label>Räume</mat-label>
+            <input type="text" matInput [matAutocomplete]="auto" [formControl]="roomControl">
+            <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let room of filteredRooms | async" [value]="room">
+                    {{room}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+
     </mat-card-content>
 </mat-card>

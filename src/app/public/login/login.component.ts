@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
   {
     if(this.loginForm.valid)
     {
-      this.api.loginUser(this.loginForm.get("email")?.value, this.loginForm.get("password")?.value).subscribe({
+      this.api.loginUser(this.loginForm.value).subscribe({
         next: (res) => 
         {
           if(!res.error)

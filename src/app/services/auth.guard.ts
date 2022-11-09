@@ -18,7 +18,7 @@ export class AuthGuard implements CanActivate, CanLoad {
   canLoad(
     route: Route,
     segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    const _user = localStorage.getItem("UserData");
+    const _user = localStorage.getItem("UserData"); //Vereinfachte Abfrage, eigentlich müsste hier eine Backendanfrage mit JWT hin
     if(_user)
     {
       return true;
