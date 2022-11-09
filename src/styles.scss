@@ -15,6 +15,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     padding: 20px;
 }
 
+.gsobk {
+    background-color: white;
+    color: #222;
+    text-align: center;
+    align-items: center;
+}
+
 
 a {
     text-decoration: none;
@@ -30,4 +37,12 @@ a {
 
 table {
     width: 100%;
-  }
+}
+
+.clickable-row {
+    cursor: pointer;
+
+    &:hover {
+        background-color: #3e8be8;
+    }
+}

@@ -2,12 +2,12 @@
     <button mat-icon-button (click)="drawer.toggle()"><mat-icon>menu</mat-icon></button>
     <a href="#" style="margin-left:10px;"><img src="/assets/logo.png" height="64px" /></a>
     <span class="spacer"></span>
-    <span style="font-size: small">{{user.currentUser.firstName}} {{user.currentUser.lastName}} ({{user.currentUser.role}})</span>
+    <span style="font-size: small">{{user.currentUser.firstName | titlecase}} {{user.currentUser.lastName | titlecase}} ({{user.currentUser.role | role}})</span>
     <img [src]="user.currentUser.avatar" class="avatar clickable" [matMenuTriggerFor]="profileMenu" />
 </mat-toolbar>
 
 <mat-menu #profileMenu="matMenu">
-    <button mat-menu-item [routerLink]="['/private', 'myprofile']">Mein Profil</button>
+    <button mat-menu-item [routerLink]="['/private', 'user', user.currentUser.id]">Mein Profil</button>
     <button mat-menu-item (click)="logout()">Ausloggen</button>
 </mat-menu>
 

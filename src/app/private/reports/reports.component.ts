@@ -2,27 +2,31 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Role, User } from 'src/app/models/user';
+import { Report, RoomType } from 'src/app/models/report';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss']
+  selector: 'app-reports',
+  templateUrl: './reports.component.html',
+  styleUrls: ['./reports.component.scss']
 })
-export class UsersComponent {
+export class ReportsComponent {
 
-  displayedColumns: string[] = ['id', 'email', 'name'];
-  dataSource: MatTableDataSource<User> = new MatTableDataSource();
+  displayedColumns: string[] = ['room', 'status'];
+  dataSource: MatTableDataSource<Report> = new MatTableDataSource();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private api: ApiService) {}
+  constructor(
+    private api: ApiService
+  ) {}
 
   ngOnInit(): void {
-    this.api.getUsers().subscribe(res => {
-      if(res){
+
+    this.api.getReports().subscribe(res => {
+      if(res) 
+      {
         this.dataSource.data = res;
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;

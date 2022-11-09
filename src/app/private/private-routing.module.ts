@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FaqComponent } from '../privates/faq/faq.component';
-import { ReportComponent } from '../privates/report/report.component';
-import { ReportsComponent } from '../privates/reports/reports.component';
-import { UserComponent } from '../privates/user/user.component';
+import { FaqComponent } from './faq/faq.component';
+import { ReportComponent } from '../private/report/report.component';
+import { ReportsComponent } from '../private/reports/reports.component';
+import { UserComponent } from '../private/user/user.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PrivateComponent } from './private.component';
 import { UsersComponent } from './users/users.component';
@@ -30,7 +30,7 @@ const routes: Routes = [
         component: ReportsComponent
       },  
       {
-        path: 'report',
+        path: 'report/:id',
         component: ReportComponent
       },  
       {

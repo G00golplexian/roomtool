@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Navigation } from '../models/navigation';
 import { UserService } from '../services/user.service';
@@ -40,7 +41,8 @@ export class PrivateComponent implements OnInit {
   
   constructor(
     public user: UserService,
-    private router: Router
+    private router: Router,
+    private snack: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -48,6 +50,8 @@ export class PrivateComponent implements OnInit {
 
   logout() {
     localStorage.clear();
-    this.router.navigateByUrl("/");
+    this.router.navigateByUrl("/").finally(() => {
+      this.snack.open("Sie wurden erfolgreich ausgeloggt.", undefined, { panelClass: "gsobk", duration: 5000 });
+    });
   }
 }

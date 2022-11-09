@@ -1,0 +1,15 @@
+.user-form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.horizontal-container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+
+    & > mat-card {
+        flex: 1;
+    }
+}

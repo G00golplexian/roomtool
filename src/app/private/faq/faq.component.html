@@ -1,0 +1,13 @@
+<mat-card>
+    <mat-card-title>FAQ</mat-card-title>
+    <mat-card-content style="margin-top:20px">
+          <mat-accordion>
+            <mat-expansion-panel *ngFor="let faq of faqs">
+              <mat-expansion-panel-header>
+                <mat-panel-title>{{faq.question}}</mat-panel-title>
+              </mat-expansion-panel-header>
+                {{faq.answer}}
+            </mat-expansion-panel>
+          </mat-accordion>
+    </mat-card-content>
+</mat-card>
