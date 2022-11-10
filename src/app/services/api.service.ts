@@ -9,7 +9,7 @@ import { User } from '../models/user';
 })
 export class ApiService {
 
-  private APIURL = "https://9e86-2a02-3035-806-aa44-aed3-2af8-a8c5-5c9d.eu.ngrok.io/api/v1";
+  private APIURL = "http://127.0.0.1:8080/api/v1";
 
 
   constructor(
