@@ -19,7 +19,7 @@ export class Report {
     position: RoomPosition;
     description: string;
 
-    status?: string = "Offen";
+    status?: string = "offen";
     dateTime?: string;
     reportedBy?: number;
 

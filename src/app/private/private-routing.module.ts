@@ -7,6 +7,7 @@ import { UserComponent } from '../private/user/user.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PrivateComponent } from './private.component';
 import { UsersComponent } from './users/users.component';
+import { ReportCreateComponent } from './report-create/report-create.component';
 
 const routes: Routes = [
   {
@@ -28,11 +29,15 @@ const routes: Routes = [
       {
         path: 'reports',
         component: ReportsComponent
-      },  
+      },
       {
         path: 'report/:id',
         component: ReportComponent
-      },  
+      },
+      {
+        path: 'report-create',
+        component: ReportCreateComponent
+      },
       {
         path: 'faq',
         component: FaqComponent

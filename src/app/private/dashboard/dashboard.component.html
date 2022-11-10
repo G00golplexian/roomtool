@@ -1,11 +1,12 @@
 <mat-card>
     <mat-card-title>Dashboard</mat-card-title>
-    <mat-card-content *ngIf="user.currentUser.role != role.betreuer">
+    <mat-card-content> <!-- *ngIf="user.currentUser.role != role.betreuer" -->
+        <p>
         Willkommen im Webinterface des Raumbetreuer Tools. Mit diesem Tool können Defekte oder Auffälligkeiten
-        sämtlicher Räumlichkeiten gemeldet werden. Du hast weitere Fragen zur Funktionalität? Dann lohnt sich ein Blick
-        ins FAQ.
+        sämtlicher Räumlichkeiten gemeldet werden.<br/>Du hast weitere Fragen zur Funktionalität? Dann lohnt sich ein Blick
+        ins FAQ.</p>
     </mat-card-content>
-    <mat-card-content *ngIf="user.currentUser.role == role.betreuer">
+    <!-- <mat-card-content *ngIf="user.currentUser.role == role.betreuer">
 
         <mat-form-field>
             <mat-label>Räume</mat-label>
@@ -17,5 +18,5 @@
             </mat-autocomplete>
         </mat-form-field>
 
-    </mat-card-content>
+    </mat-card-content> -->
 </mat-card>

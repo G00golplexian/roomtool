@@ -13,6 +13,7 @@ export class RolePipe implements PipeTransform {
       case Role.lehrer: return "Fachlehrer";
       case Role.betreuer: return "Raumbetreuer";
       case Role.werkstatt: return "PC-Werkstatt";
+      case Role.user: return "Benutzer";
       default: return "Unbekannt";
     }
   }

@@ -1,7 +1,7 @@
 <div class="horizontal-container">
     <mat-card *ngIf="user">
         <mat-card-title>{{user.id == userService.currentUser.id ? "Mein Profil" : (user.firstName | titlecase) + " " + (user.lastName | titlecase)}}</mat-card-title>
-        <mat-card-content>
+        <mat-card-content style="margin-top:20px">
             
             <form class="user-form" [formGroup]="userForm" (ngSubmit)="editUser()">
                 <mat-form-field>
@@ -21,27 +21,31 @@
                     </mat-select>
                 </mat-form-field>
                 
-                <mat-form-field>
-                    <mat-label>Räume</mat-label>
-                        <input type="text" matInput [matAutocomplete]="auto" [formControl]="roomControl">
-                        <mat-autocomplete #auto="matAutocomplete">
-                            <mat-option *ngFor="let room of filteredRooms | async" [value]="room">
-                                {{room}}
-                            </mat-option>
-                        </mat-autocomplete>
-                </mat-form-field>
-                <button mat-stroked-button type="button" (click)="addRoom()">Raum zuteilen</button>
+                <ng-container *ngIf="userService.currentUser.role == role.admin && user.role == role.betreuer">
+                    <mat-form-field>
+                        <mat-label>Räume</mat-label>
+                            <input type="text" matInput [matAutocomplete]="auto" [formControl]="roomControl">
+                            <mat-autocomplete #auto="matAutocomplete">
+                                <mat-option *ngFor="let room of filteredRooms | async" [value]="room">
+                                    {{room}}
+                                </mat-option>
+                            </mat-autocomplete>
+                    </mat-form-field>
+                    <button mat-stroked-button type="button" (click)="addRoom()">Raum zuteilen</button>
+                </ng-container>
                 
-                <br/>
-                <mat-form-field>
-                    <mat-label>Aktuelles Passwort</mat-label>
-                    <input type="password" matInput formControlName="passwordOld">
-                </mat-form-field>
-                
-                <mat-form-field>
-                    <mat-label>Neues Passwort</mat-label>
-                    <input type="password" matInput formControlName="passwordNew">
-                </mat-form-field>
+                <ng-container *ngIf="userService.currentUser.id == user.id">
+                    <br/>
+                    <mat-form-field>
+                        <mat-label>Aktuelles Passwort</mat-label>
+                        <input type="password" matInput formControlName="passwordOld">
+                    </mat-form-field>
+                    
+                    <mat-form-field>
+                        <mat-label>Neues Passwort</mat-label>
+                        <input type="password" matInput formControlName="passwordNew">
+                    </mat-form-field>
+                </ng-container>
 
                 <button mat-flat-button color="primary" type="submit">Speichern</button>
             </form>
@@ -53,8 +57,8 @@
             <mat-card-title>Zugeteilte Räume</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-            <mat-list *ngIf="roomsAssigned.length > 0 else noAssignedRooms">
-                <mat-list-item style="background-color: whitesmoke" *ngFor="let room of roomsAssigned">{{ room }}</mat-list-item>
+            <mat-list *ngIf="user.rooms.length > 0 else noAssignedRooms">
+                <mat-list-item style="background-color: whitesmoke; margin-top: 10px; margin-bottom: 10px;" *ngFor="let room of user?.rooms">{{ room }}</mat-list-item>
             </mat-list>
         </mat-card-content>
     </mat-card>

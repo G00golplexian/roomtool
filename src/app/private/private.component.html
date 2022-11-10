@@ -16,12 +16,14 @@
 
         <span class="nav-title">Navigation</span>
         <mat-list role="list">
-            <mat-list-item role="listitem" *ngFor="let item of navigation">
-            <button mat-menu-item [routerLink]="item.path">
-                <mat-icon>{{item.icon}}</mat-icon>
-                {{item.name}}
-            </button>
-            </mat-list-item>
+            <ng-container *ngFor="let item of navigation">
+                <mat-list-item role="listitem" *ngIf="item.allow.includes(user.currentUser.role)">
+                <button mat-menu-item [routerLink]="item.path">
+                    <mat-icon>{{item.icon}}</mat-icon>
+                    {{item.name}}
+                </button>
+                </mat-list-item>
+            </ng-container>
         </mat-list>
 
     </mat-drawer>

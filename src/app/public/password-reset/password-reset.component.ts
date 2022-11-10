@@ -31,12 +31,9 @@ export class PasswordResetComponent implements OnInit {
   {
     if(this.passwordResetForm.invalid) return;
     this.api.resetPassword(this.passwordResetForm.get("email")?.value).subscribe(res => {
-      if(!res.error)
-      {
-        this.router.navigateByUrl("/").finally(() => {
-          this.snack.open("Ein Link zum Zurücksetzen des Passworts wurde an deine E-Mail-Adresse gesendet.", undefined, { duration: 5000 });
-        })
-      }
+      this.router.navigateByUrl("/").finally(() => {
+        this.snack.open("Ein Link zum Zurücksetzen des Passworts wurde an deine E-Mail-Adresse gesendet.", undefined, { duration: 5000, panelClass: "gsobk" });
+      })
     })
   }
 }

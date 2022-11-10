@@ -9,7 +9,7 @@ import { User } from '../models/user';
 })
 export class ApiService {
 
-  private APIURL = "https://0b44-2a02-3035-812-482e-b9c4-8c78-a43-33dc.eu.ngrok.io/api/v1";
+  private APIURL = "https://9e86-2a02-3035-806-aa44-aed3-2af8-a8c5-5c9d.eu.ngrok.io/api/v1";
 
 
   constructor(
@@ -18,7 +18,7 @@ export class ApiService {
 
   resetPassword(email: string)
   {
-    return this.http.post<LoginResult>(`${this.APIURL}/user/reset_pw`, email);
+    return this.http.post<LoginResult>(`${this.APIURL}/user/reset_pw`, {email});
   }
 
   loginUser(data: { email: string, password: string })
@@ -54,6 +54,11 @@ export class ApiService {
   getReports()
   {
     return this.http.get<Report[]>(`${this.APIURL}/reports`, { headers: this.getHeaders() });
+  }
+
+  getReportsHistory()
+  {
+    return this.http.get<Report[]>(`${this.APIURL}/history`, { headers: this.getHeaders() });
   }
 
   getReportsForRoom(roomId: string)

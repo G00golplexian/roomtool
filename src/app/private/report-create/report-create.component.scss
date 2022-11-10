@@ -5,8 +5,10 @@
     background-repeat: no-repeat;
     background-position: center;
     border: 1px solid black;
+    cursor: pointer;
 
     .marker {
+        visibility: hidden;
         pointer-events: none;
         user-select: none;
         display: block;

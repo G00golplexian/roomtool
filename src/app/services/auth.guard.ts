@@ -12,7 +12,13 @@ export class AuthGuard implements CanActivate, CanLoad {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
+      const _user = localStorage.getItem("UserData"); //Vereinfachte Abfrage, eigentlich müsste hier eine Backendanfrage mit JWT hin
+      if(_user)
+      {
+        return this.router.createUrlTree(["/private", "dashboard"]);
+      } else {
+        return true;
+      }
   }
 
   canLoad(
@@ -21,6 +27,7 @@ export class AuthGuard implements CanActivate, CanLoad {
     const _user = localStorage.getItem("UserData"); //Vereinfachte Abfrage, eigentlich müsste hier eine Backendanfrage mit JWT hin
     if(_user)
     {
+      if(!route.path?.includes("private")) return false;
       return true;
     } else {
       return this.router.createUrlTree(["/login"]);

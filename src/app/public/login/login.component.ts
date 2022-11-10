@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
       this.api.loginUser(this.loginForm.value).subscribe({
         next: (res) => 
         {
-          if(!res.error)
+          if(!res?.error)
           {
             localStorage.setItem("haumichtot", res.id.toString());
 
@@ -50,7 +50,9 @@ export class LoginComponent implements OnInit {
             })
           }
         },
-        error: (err) => this.snack.open(err.error, undefined, { duration: 5000 })
+        error: (data) => {
+          this.snack.open(data.error.error, undefined, { duration: 5000, panelClass: "gsobk" })
+        }
       })
     }
   }

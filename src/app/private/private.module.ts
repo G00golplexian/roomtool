@@ -28,6 +28,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSelectModule } from '@angular/material/select';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ReportCreateComponent } from './report-create/report-create.component';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     FaqComponent,
     ReportComponent,
     ReportsComponent,
-    RolePipe
+    RolePipe,
+    ReportCreateComponent
   ],
   imports: [
     CommonModule,
@@ -58,7 +61,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatSnackBarModule,
     MatExpansionModule,
     MatSelectModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatTabsModule
   ]
 })
 export class PrivateModule {}

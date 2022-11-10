@@ -22,7 +22,6 @@ export class UserComponent implements OnInit {
     "A001", "A002", "A003"
   ];
   filteredRooms!: Observable<string[]>;
-  roomsAssigned: string[] = [];
 
   user: User = new User();
   role = Role;
@@ -62,7 +61,7 @@ export class UserComponent implements OnInit {
         {
           this.api.getUser(Number(params.get("id"))).subscribe(res => {
             if(res) {
-              this.user = res;
+              this.user = new User(res);
               this.userForm.patchValue(res);
             }
           })
@@ -75,18 +74,34 @@ export class UserComponent implements OnInit {
   addRoom()
   {
     const _room = this.roomControl.value ?? "";
-    if(this.roomControl.value != "" && !this.roomsAssigned.includes(_room))
+    if(this.roomControl.value != "" && !this.user.rooms.includes(_room))
     {
-      this.roomsAssigned.push(_room);
-      this.snack.open(`Der Raum ${_room} wurde ${this.user.firstName} ${this.user.lastName} zugeteilt.`, undefined, { duration: 5000 });
+      this.user.rooms.push(_room);
+      this.snack.open(`Der Raum ${_room} wurde ${this.user.firstName} ${this.user.lastName} zugeteilt.`, undefined, { duration: 5000, panelClass: "gsobk" });
       this.roomControl.reset();
     }
   }
 
   editUser()
   {
-    this.api.putUser(this.user).subscribe(res => {
-      if(res.error) this.snack.open(res.error, undefined, { duration: 7000 });
+    const _oldPassword = this.userForm.get("passwordOld");
+    const _newPassword = this.userForm.get("passwordNew");
+
+    const _data = (_oldPassword?.dirty && _newPassword?.dirty) ? { ...this.user, passwordOld: _oldPassword?.value, passwordNew: _newPassword?.value } : this.user;
+
+    this.api.putUser(_data).subscribe({
+      next: (res) => {
+        if(!res?.error) {
+          _oldPassword?.reset();
+          _newPassword?.reset();
+          this.snack.open("Die Daten wurden erfolgreich gespeichert.", undefined, { duration: 7000, panelClass: "gsobk" });
+        } else {
+          this.snack.open(res.error, undefined, { duration: 7000, panelClass: "gsobk" });
+        }
+      },
+      error: (data) => {
+        this.snack.open(data.error.error, undefined, { duration: 7000, panelClass: "gsobk" });
+      }
     })
   }
 

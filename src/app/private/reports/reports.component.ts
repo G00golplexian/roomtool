@@ -12,7 +12,7 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class ReportsComponent {
 
-  displayedColumns: string[] = ['room', 'status'];
+  displayedColumns: string[] = ['id', 'room', 'status'];
   dataSource: MatTableDataSource<Report> = new MatTableDataSource();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -40,6 +40,30 @@ export class ReportsComponent {
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
+    }
+  }
+
+  changeReports(event: any)
+  {
+    if(event.tab.textLabel == "Archiv")
+    {
+      this.api.getReportsHistory().subscribe(res => {
+        if(res) 
+        {
+          this.dataSource.data = res;
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        }
+      })
+    } else {
+      this.api.getReports().subscribe(res => {
+        if(res) 
+        {
+          this.dataSource.data = res;
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        }
+      })
     }
   }
 }

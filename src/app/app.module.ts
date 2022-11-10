@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './public/login/login.component';
 import { RegisterComponent } from './public/register/register.component';
 import { PasswordResetComponent } from './public/password-reset/password-reset.component';
-import { DashboardComponent } from './private/dashboard/dashboard.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 //Material

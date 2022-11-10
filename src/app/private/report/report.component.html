@@ -1,12 +1,37 @@
 <mat-card>
-    <mat-card-title>Defekt</mat-card-title>
-    <mat-card-content>
+    <mat-card-title>Defekt #{{report.id}} in {{report.room}}</mat-card-title>
+    <mat-card-content style="margin-top:20px">
         
-        <form class="user-form">
+        <div class="report-form">
             <mat-form-field>
-                <mat-label>E-Mail</mat-label>
-                <!-- <input type="email" matInput readonly [value]="user.email"> -->
+                <mat-label>Status</mat-label>
+                <mat-select [formControl]="statusControl" (selectionChange)="saveStatus()">
+                    <mat-option *ngFor="let status of statuses" [value]="status">{{status | titlecase}}</mat-option>
+                </mat-select>
             </mat-form-field>
-        </form>
+
+            <br/>
+            <br/>
+
+            <mat-form-field>
+                <mat-label>Kategorie</mat-label>
+                <input type="text" matInput readonly [value]="report.category | titlecase">
+            </mat-form-field>
+
+            <mat-label>Ort im Raum</mat-label>
+            <div 
+                class="roomtype"
+                [ngStyle]="{'background-image': 'url(assets/rooms/'+roomtype[report.roomType]+'.png)'}"
+            >
+                <span class="marker" [ngStyle]="{'left': report.position.x+
+                'px', 'top': report.position.y+'px'}" #marker>X</span>
+            </div>
+
+            <br/>
+            <mat-form-field>
+                <mat-label>Art des Defekts</mat-label>
+                <textarea matInput cols="4" rows="6" readonly [value]="report.description"></textarea>
+            </mat-form-field>
+        </div>
     </mat-card-content>
 </mat-card>
