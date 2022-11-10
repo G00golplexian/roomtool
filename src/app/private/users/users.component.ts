@@ -12,7 +12,7 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class UsersComponent {
 
-  displayedColumns: string[] = ['id', 'email', 'name'];
+  displayedColumns: string[] = ['id', 'email', 'name', 'role'];
   dataSource: MatTableDataSource<User> = new MatTableDataSource();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
