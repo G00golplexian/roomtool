@@ -15,11 +15,7 @@ export class ReportCreateComponent implements OnInit {
   @ViewChild("marker") marker!: ElementRef;
 
   reportForm: UntypedFormGroup;
-  rooms: string[] = [
-    "C001", "C002", "C003",
-    "B001", "B002", "B003",
-    "A001", "A002", "A003"
-  ];
+  rooms: string[] = [];
   categories: string[] = [
     "Software",
     "Hardware",
@@ -66,6 +62,7 @@ export class ReportCreateComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.api.getRooms().subscribe(res => this.rooms = (res ?? []));
   }
 
   mark(event: any) {

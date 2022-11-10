@@ -16,11 +16,7 @@ export class UserComponent implements OnInit {
   
   userForm: UntypedFormGroup;
   roomControl = new FormControl<string>('');
-  rooms: string[] = [
-    "C001", "C002", "C003",
-    "B001", "B002", "B003",
-    "A001", "A002", "A003"
-  ];
+  rooms: string[] = [];
   filteredRooms!: Observable<string[]>;
 
   user: User = new User();
@@ -49,6 +45,8 @@ export class UserComponent implements OnInit {
   }
   
   ngOnInit(): void {
+
+    this.api.getRooms().subscribe(res => this.rooms = (res ?? []));
 
     this.filteredRooms = this.roomControl.valueChanges.pipe(
       startWith(''),

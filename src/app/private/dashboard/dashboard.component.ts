@@ -12,13 +12,13 @@ import { UserService } from 'src/app/services/user.service';
 export class DashboardComponent implements OnInit {
 
   role = Role;
-  roomControl = new FormControl<string>('');
+  /* roomControl = new FormControl<string>('');
   rooms: string[] = [
     "C001", "C002", "C003",
     "B001", "B002", "B003",
     "A001", "A002", "A003"
   ];
-  filteredRooms!: Observable<string[]>;
+  filteredRooms!: Observable<string[]>; */
 
   constructor(
     public user: UserService
@@ -27,8 +27,8 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  private _filter(name: string): string[] {
+  /* private _filter(name: string): string[] {
     const filterValue = name.toLowerCase();
     return this.rooms.filter(room => room.toLowerCase().includes(filterValue));
-  }
+  } */
 }

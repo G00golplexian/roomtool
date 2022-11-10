@@ -9,7 +9,7 @@ import { User } from '../models/user';
 })
 export class ApiService {
 
-  private APIURL = "http://127.0.0.1:8080/api/v1";
+  private APIURL = "http://localhost:8080/api/v1";
 
 
   constructor(
@@ -49,6 +49,11 @@ export class ApiService {
   changePassword(oldPassword: string, newPassword: string)
   {
     return this.http.put<APIResult>(`${this.APIURL}/user/password`, { oldPassword, newPassword }, { headers: this.getHeaders() });
+  }
+
+  getRooms()
+  {
+    return this.http.get<string[]>(`${this.APIURL}/rooms`, { headers: this.getHeaders() });
   }
 
   getReports()
