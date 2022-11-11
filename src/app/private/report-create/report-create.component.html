@@ -1,49 +1,81 @@
-<mat-card>
-    <mat-card-header>
-        <mat-card-title>Defekt melden</mat-card-title>
-    </mat-card-header>
 
+<div class="horizontal-container">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Defekt melden</mat-card-title>
+        </mat-card-header>
+
+            <mat-card-content>
+
+                <form class="report-form" [formGroup]="reportForm" (ngSubmit)="sendReport()">
+                    <mat-form-field>
+                        <mat-label>Raum</mat-label>
+                        <mat-select formControlName="room" (selectionChange)="switchRoom($event)">
+                            <mat-option *ngFor="let room of rooms" [value]="room">{{room}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <mat-label>Kategorie</mat-label>
+                        <mat-select formControlName="category">
+                            <mat-option *ngFor="let category of categories" [value]="category">{{category}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <mat-label>Raumtyp</mat-label>
+                        <mat-select formControlName="roomType">
+                            <mat-option *ngFor="let roomType of roomTypes" [value]="roomType.type">{{roomType.text}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-label>Ort im Raum (bitte markieren)</mat-label>
+                    <div 
+                        (click)="mark($event)" 
+                        class="roomtype"
+                        [ngStyle]="{'background-image': 'url(assets/rooms/'+roomtype[reportForm.get('roomType')?.value]+'.png)'}"
+                    >
+                        <span class="marker" #marker>↖</span>
+                    </div>
+
+                    <br/>
+                    <mat-form-field>
+                        <mat-label>Art des Defekts</mat-label>
+                        <textarea matInput formControlName="description" cols="4" rows="6"></textarea>
+                    </mat-form-field>
+
+                    <button mat-flat-button color="primary" type="submit" [disabled]="reportForm.invalid">Absenden</button>
+
+                </form>
+            </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Bereits gemeldet</mat-card-title>
+        </mat-card-header>
         <mat-card-content>
 
-            <form class="report-form" [formGroup]="reportForm" (ngSubmit)="sendReport()">
-                <mat-form-field>
-                    <mat-label>Raum</mat-label>
-                    <mat-select formControlName="room">
-                        <mat-option *ngFor="let room of rooms" [value]="room">{{room}}</mat-option>
-                    </mat-select>
-                </mat-form-field>
+            <mat-accordion *ngIf="reportsForRoom.length > 0 else noReports">
+                <mat-expansion-panel *ngFor="let report of reportsForRoom">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>{{report.description}}</mat-panel-title>
+                  </mat-expansion-panel-header>
+                    <mat-label>Ort im Raum</mat-label>
+                    <div 
+                        class="roomtype-readonly"
+                        [ngStyle]="{'background-image': 'url(assets/rooms/'+roomtype[report.roomType]+'.png)'}"
+                    >
+                        <span class="markerReadonly" [ngStyle]="{'left': report.position.x+
+                        'px', 'top': report.position.y+'px'}">↖</span>
+                    </div>
+                </mat-expansion-panel>
+              </mat-accordion>
 
-                <mat-form-field>
-                    <mat-label>Kategorie</mat-label>
-                    <mat-select formControlName="category">
-                        <mat-option *ngFor="let category of categories" [value]="category">{{category}}</mat-option>
-                    </mat-select>
-                </mat-form-field>
-
-                <mat-form-field>
-                    <mat-label>Raumtyp</mat-label>
-                    <mat-select formControlName="roomType">
-                        <mat-option *ngFor="let roomType of roomTypes" [value]="roomType.type">{{roomType.text}}</mat-option>
-                    </mat-select>
-                </mat-form-field>
-
-                <mat-label>Ort im Raum (bitte markieren)</mat-label>
-                <div 
-                    (click)="mark($event)" 
-                    class="roomtype"
-                    [ngStyle]="{'background-image': 'url(assets/rooms/'+roomtype[reportForm.get('roomType')?.value]+'.png)'}"
-                >
-                    <span class="marker" #marker>↖</span>
-                </div>
-
-                <br/>
-                <mat-form-field>
-                    <mat-label>Art des Defekts</mat-label>
-                    <textarea matInput formControlName="description" cols="4" rows="6"></textarea>
-                </mat-form-field>
-
-                <button mat-flat-button color="primary" type="submit" [disabled]="reportForm.invalid">Absenden</button>
-
-            </form>
         </mat-card-content>
-</mat-card>
+    </mat-card>
+</div>
+
+<ng-template #noReports>
+    <span>Bisher keine gemeldeten Defekte</span>
+</ng-template>

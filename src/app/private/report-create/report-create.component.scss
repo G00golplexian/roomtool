@@ -1,14 +1,12 @@
-.roomtype {
+.roomtype-readonly {
     width: 500px;
     height: 500px;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     border: 1px solid black;
-    cursor: pointer;
 
-    .marker {
-        visibility: hidden;
+    .markerReadonly {
         pointer-events: none;
         user-select: none;
         display: block;
@@ -24,9 +22,20 @@
     }
 }
 
+.roomtype {
+    @extend .roomtype-readonly;
+    cursor: pointer;
+
+    .marker {
+        @extend .markerReadonly;
+        visibility: hidden;
+    }
+}
+
 .report-form {
     display: flex;
     flex-direction: column;
     max-width: 500px;
     margin-top: 20px;
 }
+

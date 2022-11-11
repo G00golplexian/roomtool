@@ -9,6 +9,7 @@ import { ReportComponent } from './report/report.component';
 import { ReportsComponent } from './reports/reports.component';
 import { RolePipe } from '../pipes/role.pipe';
 import { UserComponent } from './user/user.component';
+import { getGermanPaginatorIntl } from '../models/german-paginator-intl';
 
 //Material
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -21,7 +22,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { UsersComponent } from './users/users.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -63,6 +64,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatSelectModule,
     MatAutocompleteModule,
     MatTabsModule
-  ]
+  ],
+  providers: [{ provide: MatPaginatorIntl, useValue: getGermanPaginatorIntl() }],
 })
 export class PrivateModule {}

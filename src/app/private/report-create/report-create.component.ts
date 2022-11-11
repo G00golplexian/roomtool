@@ -15,6 +15,7 @@ export class ReportCreateComponent implements OnInit {
   @ViewChild("marker") marker!: ElementRef;
 
   reportForm: UntypedFormGroup;
+  reportsForRoom: Report[] = [];
   rooms: string[] = [];
   categories: string[] = [
     "Software",
@@ -90,5 +91,10 @@ export class ReportCreateComponent implements OnInit {
         }
       })
     }
+  }
+
+  switchRoom(event: any)
+  {
+    this.api.getReportsForRoom(event.value).subscribe(res => this.reportsForRoom = res);
   }
 }
