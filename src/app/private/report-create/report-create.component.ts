@@ -84,7 +84,9 @@ export class ReportCreateComponent implements OnInit {
       this.api.postReport(_report).subscribe(res => {
         if (!res?.error) {
           this.snack.open("Der Defekt wurde erfolgreich gemeldet.", undefined, { duration: 5000, panelClass: "gsobk" });
-          this.router.navigate(["/private", "reports"]);
+          this.reportForm.reset();
+          this.reportForm.get("roomType")?.patchValue(RoomType.omnibus);
+          this.marker.nativeElement.style.visibility = "hidden";
         }
       })
     }

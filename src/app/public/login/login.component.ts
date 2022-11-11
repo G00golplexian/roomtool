@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
           }
         },
         error: (data) => {
-          this.snack.open(data.error.error, undefined, { duration: 5000, panelClass: "gsobk" })
+          this.snack.open("Während des Vorgangs ist ein Fehler aufgetreten.", undefined, { duration: 5000, panelClass: "gsobk" })
         }
       })
     }

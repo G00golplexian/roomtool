@@ -25,7 +25,8 @@ export class UserComponent implements OnInit {
     Role.admin,
     Role.betreuer,
     Role.lehrer,
-    Role.werkstatt
+    Role.werkstatt,
+    Role.user
   ]
   
   constructor(
@@ -39,7 +40,7 @@ export class UserComponent implements OnInit {
     this.userForm = fb.group({
       passwordOld: "",
       passwordNew: "",
-      role: ["", Validators.required],
+      role: [Role.user, Validators.required],
       rooms: [""]
     });
   }
@@ -82,6 +83,7 @@ export class UserComponent implements OnInit {
 
   editUser()
   {
+    this.user.role = this.userForm.get("role")?.value;
     const _oldPassword = this.userForm.get("passwordOld");
     const _newPassword = this.userForm.get("passwordNew");
 
